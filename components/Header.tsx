@@ -32,7 +32,7 @@ const Header = () => {
         <div className="flex h-20 items-center justify-between">
           <div className="flex items-center">
             <Link href="/" className="flex items-center space-x-2">
-              <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-800">
+              <span className="text-2xl font-bold bg-clip-text text-transparent bg-[#5ca4d4]">
                 ElevateSoft
               </span>
             </Link>
@@ -49,7 +49,7 @@ const Header = () => {
                 {item.name}
               </Link>
             ))}
-            <Button className="bg-blue-600 hover:bg-blue-700 text-white rounded-lg px-6">
+            <Button className="bg-[#5ca4d4] hover:bg-blue-700 text-white rounded-lg px-6">
               Try Free
             </Button>
           </div>
