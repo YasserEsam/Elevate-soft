@@ -29,7 +29,7 @@ const testimonials = [
     content: "Professional team and timely delivery. I highly recommend their services!",
     name: "Michael Lee",
     role: "Marketing Specialist",
-    image: "https://images.unsplash.com/photo-1502767089025-6572583495b0?auto=format&fit=crop&q=80&w=150&h=150",
+    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=150&h=150",
   },
   {
     id: 4,
