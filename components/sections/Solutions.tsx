@@ -29,7 +29,7 @@ const features = [
   }
 ];
 
-const FeatureCard = ({ feature, index }) => {
+const FeatureCard = ({ feature, index } : { feature: any; index: number }) => {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
