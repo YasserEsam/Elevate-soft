@@ -4,7 +4,7 @@ import { ReactNode } from "react"; // Add this at the top
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { ArrowRight, Activity, BarChart2, Clock, Users, DollarSign , TrendingUpلهف  } from "lucide-react";
+import { ArrowRight, Activity, BarChart2, Clock, Users, DollarSign , TrendingUp } from "lucide-react";
 import { useInView } from "react-intersection-observer";
 
 const stats = [
