@@ -2,6 +2,10 @@
 
 import Image from "next/image";
 import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const logos = [
   { name: "Grandshop", image: "/logos/grandshop.svg" },
@@ -12,68 +16,74 @@ const logos = [
 ];
 
 export default function LogoCloud() {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const scrollSpeedRef = useRef(0);
-  const positionRef = useRef(0);
-  const lastScrollRef = useRef(0);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const el = scrollRef.current;
-    const container = containerRef.current;
-    if (!el || !container) return;
+    const track = trackRef.current;
+    const wrapper = wrapperRef.current;
+    if (!track || !wrapper) return;
 
-    const totalWidth = el.offsetWidth / 2; // Because we're duplicating the logos
-    let animationFrame: number;
+    // Get original width and duplicate content
+    const totalWidth = track.scrollWidth;
+    track.innerHTML += track.innerHTML;
+    track.style.width = `${totalWidth * 2}px`;
 
-    const update = () => {
-      positionRef.current -= scrollSpeedRef.current;
+    // Auto-scrolling animation
+    const loop = gsap.to(track, {
+      x: `-=${totalWidth}`,
+      duration: 60,
+      ease: "linear",
+      repeat: -1,
+      modifiers: {
+        x: gsap.utils.unitize(x => parseFloat(x) % totalWidth),
+      },
+    });
 
-      // Wrap logic: reset when exceeding width
-      if (positionRef.current <= -totalWidth) {
-        positionRef.current = 0;
-      } else if (positionRef.current >= 0) {
-        positionRef.current = -totalWidth;
-      }
-
-      el.style.transform = `translateX(${positionRef.current}px)`;
-      animationFrame = requestAnimationFrame(update);
-    };
-
-    const onScroll = () => {
-      const currentScroll = window.scrollY;
-      const delta = currentScroll - lastScrollRef.current;
-      lastScrollRef.current = currentScroll;
-
-      scrollSpeedRef.current = delta * 0.5; // Adjust multiplier for speed feel
-    };
-
-    window.addEventListener("scroll", onScroll);
-    animationFrame = requestAnimationFrame(update);
+    // Scroll-based override animation
+    const scrollTrigger = ScrollTrigger.create({
+      trigger: wrapper,
+      start: "top bottom",
+      end: "bottom top",
+      scrub: 0.5,
+      onUpdate: (self) => {
+        const velocity = self.getVelocity();
+        // Adjust speed & direction based on scroll velocity
+        gsap.to(track, {
+          x: `-=${velocity / 10}`,
+          duration: 1,
+          ease: "power2.out",
+          overwrite: "auto",
+          modifiers: {
+            x: gsap.utils.unitize(x => parseFloat(x) % totalWidth),
+          },
+        });
+      },
+    });
 
     return () => {
-      cancelAnimationFrame(animationFrame);
-      window.removeEventListener("scroll", onScroll);
+      loop.kill();
+      scrollTrigger.kill();
+      ScrollTrigger.getAll().forEach(t => t.kill());
     };
   }, []);
 
   return (
-    <section className="py-16 overflow-hidden">
+    <section className="py-16">
       <div className="max-w-full mx-auto px-4 md:px-2">
-        <div ref={containerRef} className="overflow-hidden relative w-full">
+        <div ref={wrapperRef} className="relative overflow-hidden">
           <div
-            ref={scrollRef}
+            ref={trackRef}
             className="flex gap-10 items-center opacity-80 will-change-transform"
-            style={{ width: "max-content" }}
           >
-            {[...logos, ...logos].map((logo, index) => (
-              <div key={index} className="flex items-center justify-center min-w-[200px]">
+            {logos.map((logo, index) => (
+              <div key={index} className="flex-shrink-0 px-5">
                 <Image
                   src={logo.image}
                   alt={logo.name}
                   width={200}
                   height={200}
-                  className="h-10 object-contain"
+                  className="h-10 object-contain max-w-none"
                 />
               </div>
             ))}
