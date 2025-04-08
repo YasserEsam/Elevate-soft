@@ -1,5 +1,6 @@
 "use client";
 
+import { ReactNode } from "react"; // Add this at the top
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
@@ -19,7 +20,7 @@ const activities = [
   { id: 4, user: "Taylor Smith", action: "Upgraded plan", time: "3h ago", amount: "$29.99" }
 ];
 
-const AnimatedCard = ({ children, delay = 0 }) => {
+const AnimatedCard = ({ children, delay = 0 }: { children: ReactNode; delay?: number }) => {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -56,7 +57,7 @@ export default function Analytics() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            Simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+            Simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s
           </motion.p>
         </div>
 
