@@ -11,21 +11,30 @@ const features = [
     description: "Simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's",
     icon: Briefcase,
     link: "See Details",
-    accentColor: "bg-blue-100"
+    accentColor: "bg-blue-100",
+    iconColor: "text-blue-600",
+    hoverColor: "hover:shadow-blue-100/30",
+    highlightColor: "bg-blue-200/20"
   },
   {
     title: "Drive More Sales",
     description: "Simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's",
     icon: LineChart,
     link: "See Details",
-    accentColor: "bg-purple-100"
+    accentColor: "bg-purple-100",
+    iconColor: "text-purple-600",
+    hoverColor: "hover:shadow-purple-100/30",
+    highlightColor: "bg-purple-200/20"
   },
   {
     title: "Handled By Expert",
     description: "Simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's",
     icon: Users,
     link: "See Details",
-    accentColor: "bg-amber-100"
+    accentColor: "bg-amber-100",
+    iconColor: "text-amber-600",
+    hoverColor: "hover:shadow-amber-100/30",
+    highlightColor: "bg-amber-200/20"
   }
 ];
 
@@ -42,21 +51,23 @@ const FeatureCard = ({ feature, index } : { feature: any; index: number }) => {
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay: index * 0.1 }}
     >
-      <Card className="p-8 hover:shadow-lg transition-all duration-300 group relative overflow-hidden h-full">
-        {/* Decorative elements */}
-        <div className={`absolute -top-10 -right-10 w-32 h-32 rounded-full ${feature.accentColor} opacity-10 group-hover:opacity-20 transition-opacity duration-500`}></div>
-        <Sparkles className="absolute top-4 right-4 h-6 w-6 text-yellow-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      <Card className={`p-8 hover:shadow-lg transition-all duration-300 group relative overflow-hidden h-full border-0 shadow-sm ${feature.hoverColor}`}>
+        {/* Colorful background elements */}
+        <div className={`absolute inset-0 ${feature.highlightColor} opacity-30 rounded-xl`}></div>
+        <div className={`absolute -top-10 -right-10 w-32 h-32 rounded-full ${feature.accentColor} opacity-30 group-hover:opacity-40 transition-opacity duration-500`}></div>
         
-        <div className={`w-12 h-12 rounded-lg ${feature.accentColor} flex items-center justify-center mb-6 relative z-10`}>
-          <feature.icon className="h-6 w-6 text-blue-600" />
+        <Sparkles className={`absolute top-4 right-4 h-6 w-6 ${feature.iconColor} opacity-30 group-hover:opacity-100 transition-opacity duration-300`} />
+        
+        <div className={`w-12 h-12 rounded-lg ${feature.accentColor} flex items-center justify-center mb-6 relative z-10 shadow-inner`}>
+          <feature.icon className={`h-6 w-6 ${feature.iconColor}`} />
         </div>
         
-        <h3 className="text-xl font-semibold mb-3 relative z-10">{feature.title}</h3>
-        <p className="text-gray-500 mb-6 relative z-10">{feature.description}</p>
+        <h3 className="text-xl font-semibold mb-3 relative z-10 text-gray-800">{feature.title}</h3>
+        <p className="text-gray-600 mb-6 relative z-10">{feature.description}</p>
         
         <Button 
           variant="link" 
-          className="p-0 text-blue-600 font-medium group-hover:text-blue-800 transition-colors relative z-10"
+          className={`p-0 ${feature.iconColor} font-medium group-hover:opacity-80 transition-all relative z-10`}
         >
           {feature.link} 
           <motion.span 
@@ -75,11 +86,12 @@ const FeatureCard = ({ feature, index } : { feature: any; index: number }) => {
 
 export default function Solutions() {
   return (
-    <section className="py-24 relative">
-      {/* Decorative background elements */}
+    <section className="py-16 relative bg-white">
+      {/* Colorful background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 left-0 w-64 h-64 bg-blue-50 rounded-full filter blur-3xl opacity-20"></div>
-        <div className="absolute bottom-0 right-0 w-64 h-64 bg-purple-50 rounded-full filter blur-3xl opacity-20"></div>
+        <div className="absolute top-0 left-0 w-64 h-64 bg-blue-200 rounded-full filter blur-3xl opacity-30"></div>
+        <div className="absolute bottom-0 right-0 w-64 h-64 bg-purple-200 rounded-full filter blur-3xl opacity-30"></div>
+        <div className="absolute top-1/2 right-1/4 w-48 h-48 bg-amber-200 rounded-full filter blur-3xl opacity-20"></div>
       </div>
       
       <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
@@ -89,14 +101,14 @@ export default function Solutions() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-3xl font-bold mb-4">
+          <h2 className="text-4xl font-bold mb-4">
             Perfect Solution For Your{" "}
             <span className="relative inline-block">
               <span className="relative z-10">Business</span>
-              <span className="absolute bottom-0 left-0 w-full h-2 bg-yellow-200 opacity-60 -z-0"></span>
+              <span className="absolute bottom-0 left-0 w-full h-3 bg-gradient-to-r from-blue-200 to-purple-200 opacity-70 -z-0 rounded-full"></span>
             </span>
           </h2>
-          <p className="text-gray-500 max-w-2xl mx-auto">
+          <p className="text-gray-600 max-w-2xl mx-auto text-lg">
             Simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s
           </p>
         </motion.div>
@@ -107,15 +119,15 @@ export default function Solutions() {
           ))}
         </div>
         
-        {/* Optional CTA at bottom */}
+        {/* Vibrant CTA at bottom */}
         <motion.div 
           className="mt-16 text-center"
           whileHover={{ scale: 1.02 }}
           transition={{ type: "spring", stiffness: 400 }}
         >
-          <Button className="px-8 py-6 text-lg font-medium rounded-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-lg">
+          <Button className="px-8 py-6 text-lg font-medium rounded-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 shadow-lg hover:shadow-blue-500/20 transition-all">
             Explore All Solutions
-            <ArrowRight className="ml-2 h-5 w-5" />
+            <ArrowRight className="ml-2 h-5 w-5 animate-pulse-hover" />
           </Button>
         </motion.div>
       </div>

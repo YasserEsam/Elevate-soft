@@ -69,15 +69,15 @@ export default function LogoCloud() {
   }, []);
 
   return (
-    <section className="py-16">
+    <section className="py-12">
       <div className="max-w-full mx-auto px-4 md:px-2">
         <div ref={wrapperRef} className="relative overflow-hidden">
           <div
             ref={trackRef}
-            className="flex gap-10 items-center opacity-80 will-change-transform"
+            className="flex gap-4 items-center opacity-80 will-change-transform"
           >
             {logos.map((logo, index) => (
-              <div key={index} className="flex-shrink-0 px-5">
+              <div key={index} className="flex-shrink-0 px-3">
                 <Image
                   src={logo.image}
                   alt={logo.name}
