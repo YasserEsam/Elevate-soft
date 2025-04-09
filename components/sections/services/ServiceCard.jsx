@@ -1,5 +1,5 @@
 //components/sections/services/ServiceCard.jsx
-import { useState } from "react";
+import { memo, useState } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { ServiceIcon } from "./ServiceIcon";
@@ -7,35 +7,17 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowUpRight, BadgeCheck } from "lucide-react";
 
-export const ServiceCard = ({ service, index }) => {
+// Memoized component to prevent unnecessary re-renders
+export const ServiceCard = memo(({ service, index }) => {
   const [ref, inView] = useInView({
     triggerOnce: true,
-    threshold: 0.05,
-    rootMargin: "-50px 0px"
+    threshold: 0.1,
   });
   
   const [hovered, setHovered] = useState(false);
 
-  // Optimized animation variants
-  const cardVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        delay: index * 0.1,
-        ease: "easeOut"
-      }
-    }
-  };
-
-  const featureVariants = {
-    hidden: { opacity: 0.7, x: 0 },
-    visible: { opacity: 1, x: 0 }
-  };
-
   return (
+  
     <motion.div
       ref={ref}
       initial={{ opacity: 0, y: 40 }}
@@ -45,8 +27,10 @@ export const ServiceCard = ({ service, index }) => {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <Card className={`group p-8 h-full bg-white/70 backdrop-blur-md border-0 hover:shadow-xl transition-all duration-500 relative overflow-hidden rounded-2xl hover:-translate-y-2`}
-        style={{ boxShadow: hovered ? `0 20px 40px -20px ${service.shadowColor}` : '0 10px 30px -15px rgba(0,0,0,0.1)' }}>
+      <Card
+        className={`group p-8 h-full bg-white/70 border-0 hover:shadow-xl transition-all duration-500 relative overflow-hidden rounded-2xl hover:-translate-y-2`}
+        style={{ boxShadow: hovered ? `0 20px 40px -20px ${service.shadowColor}` : '0 10px 30px -15px rgba(0,0,0,0.1)' }}
+      >
         {/* Background effects */}
         <div
           className={`absolute -top-24 -right-24 w-48 h-48 rounded-full opacity-0 group-hover:opacity-10 transition-all duration-700 `}
@@ -103,4 +87,6 @@ export const ServiceCard = ({ service, index }) => {
       </Card>
     </motion.div>
   );
-};
+});
+
+ServiceCard.displayName = "ServiceCard";
