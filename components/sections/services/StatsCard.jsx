@@ -1,15 +1,22 @@
 //components/sections/services/StatsCard.jsx
+import { memo } from "react";
 import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
-export const StatsCard = ({ stat, index }) => {
+export const StatsCard = memo(({ stat, index }) => {
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
   return (
     <motion.div
+      ref={ref}
       key={index}
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      viewport={{ once: true, margin: "-50px" }}
-      className="bg-white/70 backdrop-blur-sm rounded-xl p-8 text-center hover:shadow-lg transition-all"
+      initial={{ opacity: 0, y: 20 }}
+      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+      transition={{ duration: 0.4, delay: index * 0.1 }}
+      className="bg-white/70 backdrop-blur-sm rounded-xl p-8 text-center hover:shadow-md transition-all"
     >
       <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600">
         <stat.icon className="h-6 w-6" />
@@ -18,4 +25,6 @@ export const StatsCard = ({ stat, index }) => {
       <p className="text-gray-600">{stat.label}</p>
     </motion.div>
   );
-};
+});
+
+StatsCard.displayName = "StatsCard";
