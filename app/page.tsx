@@ -5,6 +5,7 @@ import Analytics from '@/components/sections/Analytics';
 import Testimonials from '@/components/sections/Testimonials';
 import Pricing from '@/components/sections/Pricing';
 import Newsletter from '@/components/sections/Newsletter';
+import OurServices from '@/components/sections/OurServices'; 
 import Footer from '@/components/Footer';
 
 export default function Home() {
@@ -12,6 +13,7 @@ export default function Home() {
     <main className="min-h-screen">
       <Hero />
       <LogoCloud />
+      <OurServices />
       <Solutions />
       <Analytics />
       <Testimonials />
