@@ -7,13 +7,12 @@ import Pricing from '@/components/sections/Pricing';
 import Newsletter from '@/components/sections/Newsletter';
 import OurServices from '@/components/sections/OurServices'; 
 import Footer from '@/components/Footer';
-import { BackgroundElements } from '@/components/BackgroundElements';
+
 
 
 export default function Home() {
   return (
     <main className="min-h-screen">
-      <BackgroundElements />
       <Hero />
       <LogoCloud />
       <OurServices />

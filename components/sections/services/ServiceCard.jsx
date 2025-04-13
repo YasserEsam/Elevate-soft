@@ -33,15 +33,7 @@ export const ServiceCard = memo(({ service, index }) => {
             <Card
                 className="group p-8 h-full bg-white/70 rounded-2xl relative overflow-hidden"
                 // Convert CSS transition to Framer Motion for better control
-                as={motion.div}
-                whileHover={{
-                    y: -4,
-                    transition: {
-                        type: 'spring',
-                        stiffness: 300,
-                        mass: 0.5,
-                    },
-                }}>
+                as={motion.div}>
                 {/* Corner background hover highlight */}
                 <div
                     className="absolute -top-24 -right-24 w-48 h-48 rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-700"

@@ -10,8 +10,10 @@ const Hero = () => {
   const isMobile = useMediaQuery({ maxWidth: 768 });
 
   return (
-    <section className="pt-32 lg:pt-16 px-4 sm:px-6 lg:px-8 bg-[#F8F9FF]">
-      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+    <section className="pt-32 lg:pt-16 px-4 sm:px-6 lg:px-8 bg-[#F8F9FF] ">
+      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center relative">
+      <div className="absolute top-0 left-10 w-96 h-80 rounded-full bg-blue-700/40 filter blur-[80px]"></div>
+
         <div className="space-y-8 text-center lg:text-start">
           <div className="space-y-6">
             <span className="text-[#5ca4d4] font-medium">
