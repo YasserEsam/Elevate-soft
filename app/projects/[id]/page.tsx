@@ -23,6 +23,6 @@ export async function generateMetadata({ params }) {
 
 export const dynamicParams = false;
 
-// Static import for better initial load
-import ProjectPage from './ProjectPage';
-export default ProjectPage;
+// Static import without client component
+import ProjectPageContainer from './ProjectPageContainer';
+export default ProjectPageContainer;
