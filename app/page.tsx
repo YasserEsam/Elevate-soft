@@ -6,6 +6,7 @@ import Testimonials from '@/components/sections/Testimonials';
 import Pricing from '@/components/sections/Pricing';
 import Newsletter from '@/components/sections/Newsletter';
 import OurServices from '@/components/sections/OurServices'; 
+import Projects from '@/components/sections/Projects';
 import Footer from '@/components/Footer';
 
 
@@ -16,6 +17,7 @@ export default function Home() {
       <Hero />
       <LogoCloud />
       <OurServices />
+      <Projects />
       <Solutions />
       <Analytics />
       <Testimonials />
